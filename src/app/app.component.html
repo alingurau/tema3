@@ -1,20 +1,152 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container">
+  <br />
+  <h1>Prima tema in Angular</h1>
 
+  <hr />
+
+  <h3>Adauga Student</h3>
+
+  <div>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="col-form-label" for="nume">Nume:</label>
+        <input id="nume" type="text" class="form-control col-form-label" [(ngModel)]="adaugaStudent.nume" />
+      </div>
+      <div class="col-md-4">
+        <label class="col-form-label" for="varsta">Varsta:</label>
+        <input id="varsta" type="number" min="0" max="100" class="form-control col-form-label"
+          [(ngModel)]="adaugaStudent.varsta" />
+      </div>
+      <div class="col-md-4">
+        <label class="col-form-label" for="medieBac">Medie BAC:</label>
+        <select id="medieBac" class="form-control col-form-label" [(ngModel)]="adaugaStudent.medieBac">
+          <option [value]="mB" *ngFor="let mB of medieBac">{{mB}}</option>
+        </select>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-3">
+        <label class="col-form-label" for="facultate">Facultate:</label>
+        <input id="facultate" type="text" class="form-control col-form-label" [(ngModel)]="adaugaStudent.facultate" />
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label" for="sectie">Sectia:</label>
+        <input id="sectie" type="text" min="0" max="100" class="form-control col-form-label"
+          [(ngModel)]="adaugaStudent.sectie" />
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label" for="anul">Anul:</label>
+        <select id="anul" class="form-control col-form-label" [(ngModel)]="adaugaStudent.anul">
+          <option [value]="a" *ngFor="let a of anul">{{a}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label" for="bursaDeStudiu">Bursa de Studiu:</label>
+        <select id="bursaDeStudiu" class="form-control col-form-label" [(ngModel)]="adaugaStudent.bursaDeStudiu">
+          <option [value]="bDS" *ngFor="let bDS of bursaDeStudiu">{{bDS}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <span *ngIf="errAdauga == true" class="text-danger">Eroare! Va rugam sa completati toate campurile!</span>
+
+  <br />
+
+  <button class="btn btn-success"
+    (click)="adauga(null, adaugaStudent.nume, adaugaStudent.varsta, adaugaStudent.medieBac, adaugaStudent.facultate, adaugaStudent.sectie, adaugaStudent.anul, adaugaStudent.bursaDeStudiu)">Adauga
+    Student</button>
+
+  <br /><br />
+
+  <h3>Student existent</h3>
+
+  <div *ngIf="students && students.length > 0">
+    <p>Acest tabel contine toti studentii din vector</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Id</th>
+          <th>Nume</th>
+          <th>Varsta</th>
+          <th>Medie BAC</th>
+          <th>Faculate</th>
+          <th>Sectie</th>
+          <th>Anul</th>
+          <th>Bursa de Studiu</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of students">
+          <td>
+            <a class="text-primary" style="cursor: pointer;" (click)="editeaza(s)">Editeaza</a>
+          </td>
+          <td>{{s.getId()}}</td>
+          <td>{{s.getNume()}}</td>
+          <td align="center">{{s.getVarsta()}}</td>
+          <td align="center">{{s.getMedieBac()}}</td>
+          <td>{{s.getFacultate()}}</td>
+          <td>{{s.getSectie()}}</td>
+          <td align="center">{{s.getAnul()}}</td>
+          <td align="center">{{s.getBursaDeStudiu()}}</td>
+          <td><a class="text-danger" style="cursor: pointer;" (click)="sterge(s.getId())">Sterge</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <b *ngIf="students.length == 0" class="text-danger">Nu exista elemente in lista!</b>
+
+  <div *ngIf="studentIsSelected == true">
+    <h3>Student in curs de editare:</h3>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="col-form-label" for="editNume">Nume:</label>
+        <input id="editNume" type="text" class="form-control " [(ngModel)]="editStudent.nume" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="col-form-label" for="editVarsta">Varsta:</label>
+        <input id="editVarsta" type="number" min="0" max="100" class="form-control" [(ngModel)]="editStudent.varsta" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="col-form-label" for="editMedieBac">Medie BAC:</label>
+        <select id="editMedieBac" class="form-control text-center" [(ngModel)]="editStudent.medieBac">
+          <option [value]="mB" *ngFor="let mB of medieBac">{{mB}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label class="col-form-label" for="editFacultate">Facultate:</label>
+        <input id="editFacultate" type="text" class="form-control" [(ngModel)]="editStudent.facultate" />
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label" for="editSectie">Sectia:</label>
+        <input id="editSectie" type="text" min="0" max="100" class="form-control" [(ngModel)]="editStudent.sectie" />
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label" for="editAnul">Anul:</label>
+        <select id="editAnul" class="form-control text-center" [(ngModel)]="editStudent.anul">
+          <option [value]="a" *ngFor="let a of anul">{{a}}</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label class="col-form-label" for="editBursaDeStudiu">Bursa de Studiu:</label>
+        <select id="editBursaDeStudiu" class="form-control text-center" [(ngModel)]="editStudent.bursaDeStudiu">
+          <option [value]="bDS" *ngFor="let bDS of bursaDeStudiu">{{bDS}}</option>
+        </select>
+      </div>
+    </div>
+    <span *ngIf="errEditeaza == true" class="text-danger">Eroare! Va rugam sa completati toate campurile!</span>
+
+    <br />
+
+    <button class="btn btn-success" (click)="salveaza()">Salveaza editarile</button>&nbsp;&nbsp;
+    <button class="btn btn-warning" (click)="deselecteaza()">Renunta</button>
+  </div>
+</div>
