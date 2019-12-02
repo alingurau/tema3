@@ -13,11 +13,7 @@ export class AppComponent {
 
   public editStudent: any = {};
 
-  public medieBac: Array<number> = [10, 9, 8, 7];
-
   public anul: Array<number> = [1, 2, 3, 4];
-
-  public bursaDeStudiu: Array<string> = ["DA", "NU"];
 
   public errAdauga: boolean = false;
   public errEditeaza: boolean = false;
@@ -65,7 +61,18 @@ export class AppComponent {
         id = 1;
       }
     }
-    if (nume != " " && nume != null && varsta != null && medieBac != null) {
+    if (
+      nume != " " &&
+      nume != null &&
+      varsta != null &&
+      medieBac != null &&
+      facultate != " " &&
+      facultate != null &&
+      anul != null &&
+      sectie != " " &&
+      sectie != null &&
+      bursaDeStudiu != null
+    ) {
       var s: Student = new Student(
         id,
         nume,

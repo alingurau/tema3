@@ -14,14 +14,13 @@
       </div>
       <div class="col-md-4">
         <label class="col-form-label" for="varsta">Varsta:</label>
-        <input id="varsta" type="number" min="0" max="100" class="form-control col-form-label"
+        <input id="varsta" type="number" min="18" max="100" class="form-control col-form-label"
           [(ngModel)]="adaugaStudent.varsta" />
       </div>
       <div class="col-md-4">
         <label class="col-form-label" for="medieBac">Medie BAC:</label>
-        <select id="medieBac" class="form-control col-form-label" [(ngModel)]="adaugaStudent.medieBac">
-          <option [value]="mB" *ngFor="let mB of medieBac">{{mB}}</option>
-        </select>
+        <input type="number" minlength="0" maxlength="10" id="medieBac" class="form-control col-form-label"
+          [(ngModel)]="adaugaStudent.medieBac" />
       </div>
     </div>
     <br>
@@ -42,10 +41,9 @@
         </select>
       </div>
       <div class="col-md-3">
-        <label class="col-form-label" for="bursaDeStudiu">Bursa de Studiu:</label>
-        <select id="bursaDeStudiu" class="form-control col-form-label" [(ngModel)]="adaugaStudent.bursaDeStudiu">
-          <option [value]="bDS" *ngFor="let bDS of bursaDeStudiu">{{bDS}}</option>
-        </select>
+        <label class="col-form-label" for="bursaDeStudiu">Bursa de Studiu:</label><br>
+        <input type="radio" value="DA" id="bursaDeStudiu" [(ngModel)]="adaugaStudent.bursaDeStudiu" /> DA<br>
+        <input type="radio" value="NU" id="bursaDeStudiu" [(ngModel)]="adaugaStudent.bursaDeStudiu" /> NU<br>
       </div>
     </div>
   </div>
@@ -86,12 +84,12 @@
           </td>
           <td>{{s.getId()}}</td>
           <td>{{s.getNume()}}</td>
-          <td align="center">{{s.getVarsta()}}</td>
-          <td align="center">{{s.getMedieBac()}}</td>
+          <td>{{s.getVarsta()}}</td>
+          <td>{{s.getMedieBac()}}</td>
           <td>{{s.getFacultate()}}</td>
           <td>{{s.getSectie()}}</td>
-          <td align="center">{{s.getAnul()}}</td>
-          <td align="center">{{s.getBursaDeStudiu()}}</td>
+          <td>{{s.getAnul()}}</td>
+          <td>{{s.getBursaDeStudiu()}}</td>
           <td><a class="text-danger" style="cursor: pointer;" (click)="sterge(s.getId())">Sterge</a></td>
         </tr>
       </tbody>
@@ -110,14 +108,12 @@
 
       <div class="col-md-4">
         <label class="col-form-label" for="editVarsta">Varsta:</label>
-        <input id="editVarsta" type="number" min="0" max="100" class="form-control" [(ngModel)]="editStudent.varsta" />
+        <input id="editVarsta" type="number" min="18" max="100" class="form-control" [(ngModel)]="editStudent.varsta" />
       </div>
 
       <div class="col-md-4">
         <label class="col-form-label" for="editMedieBac">Medie BAC:</label>
-        <select id="editMedieBac" class="form-control text-center" [(ngModel)]="editStudent.medieBac">
-          <option [value]="mB" *ngFor="let mB of medieBac">{{mB}}</option>
-        </select>
+        <input type="number" id="editMedieBac" class="form-control" [(ngModel)]="editStudent.medieBac" />
       </div>
     </div>
     <div class="row">
@@ -131,15 +127,14 @@
       </div>
       <div class="col-md-3">
         <label class="col-form-label" for="editAnul">Anul:</label>
-        <select id="editAnul" class="form-control text-center" [(ngModel)]="editStudent.anul">
+        <select id="editAnul" class="form-control" [(ngModel)]=" editStudent.anul">
           <option [value]="a" *ngFor="let a of anul">{{a}}</option>
         </select>
       </div>
       <div class="col-md-3">
-        <label class="col-form-label" for="editBursaDeStudiu">Bursa de Studiu:</label>
-        <select id="editBursaDeStudiu" class="form-control text-center" [(ngModel)]="editStudent.bursaDeStudiu">
-          <option [value]="bDS" *ngFor="let bDS of bursaDeStudiu">{{bDS}}</option>
-        </select>
+        <label class="col-form-label" for="editBursaDeStudiu">Bursa de Studiu:</label><br>
+        <input type="radio" value="DA" id="editBursaDeStudiu" [(ngModel)]="editStudent.bursaDeStudiu" />DA <br>
+        <input type="radio" value="NU" id="editBursaDeStudiu" [(ngModel)]="editStudent.bursaDeStudiu" />NU<br>
       </div>
     </div>
     <span *ngIf="errEditeaza == true" class="text-danger">Eroare! Va rugam sa completati toate campurile!</span>
